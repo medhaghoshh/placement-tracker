@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application details · PlacementTrack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <script>if(!localStorage.getItem('pt_token'))location.replace('login.html');</script>
+</head>
+<body>
+  <div class="backdrop" id="backdrop"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="mark">PT</span> PlacementTrack</div>
+      <nav class="nav">
+        <a href="dashboard.html" data-page="dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+        <a href="applications.html" data-page="applications"><i class="fa-solid fa-briefcase"></i> Applications</a>
+        <a href="upcoming.html" data-page="upcoming"><i class="fa-solid fa-calendar-day"></i> Upcoming</a>
+        <a href="profile.html" data-page="profile"><i class="fa-solid fa-user"></i> Profile</a>
+        <span class="spacer"></span>
+        <a href="#" class="nav-logout" data-logout><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+          <div class="greet">
+            <a href="applications.html" class="link-btn"><i class="fa-solid fa-arrow-left"></i> Back to applications</a>
+          </div>
+        </div>
+        <div class="topbar-right"><div class="avatar">?</div></div>
+      </header>
+
+      <main class="content">
+        <div class="state row-loading" id="loading"><div class="spinner"></div> Loading application…</div>
+
+        <div id="detail-body" class="hidden">
+          <!-- Header -->
+          <div class="panel" style="margin-bottom:18px">
+            <div class="detail-head">
+              <div class="detail-title">
+                <div class="co-logo" id="d-logo">A</div>
+                <div>
+                  <h1 id="d-company">Company</h1>
+                  <div class="role" id="d-role">Role</div>
+                </div>
+              </div>
+              <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+                <span id="d-status" class="badge">Status</span>
+                <button class="btn btn-ghost btn-sm" id="edit-btn"><i class="fa-solid fa-pen"></i> Edit</button>
+                <button class="btn btn-danger btn-sm" id="delete-btn"><i class="fa-solid fa-trash"></i> Delete</button>
+              </div>
+            </div>
+
+            <!-- Timeline (signature element) -->
+            <div class="timeline" id="timeline"></div>
+          </div>
+
+          <!-- Details grid -->
+          <div class="panel">
+            <div class="panel-head"><h3>Details</h3></div>
+            <div class="detail-grid" id="detail-grid"></div>
+            <div id="notes-wrap"></div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="modal-root"></div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/applications.js"></script>
+  <script src="js/application-details.js"></script>
+</body>
+</html>

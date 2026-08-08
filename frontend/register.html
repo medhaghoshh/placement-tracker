@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create account · PlacementTrack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+  <div class="auth-wrap">
+    <aside class="auth-brand">
+      <div class="brand-logo">
+        <span class="mark">PT</span>
+        <span>PlacementTrack</span>
+      </div>
+      <div class="auth-brand-body">
+        <h1>Start with your very first company.</h1>
+        <p>Log applications as you apply, and watch a clear picture of your placement season build itself — no spreadsheets, no chaos.</p>
+      </div>
+      <div class="brand-stats">
+        <div>
+          <div class="s-num">All</div>
+          <div class="s-lab">branches and courses welcome</div>
+        </div>
+        <div>
+          <div class="s-num">Free</div>
+          <div class="s-lab">and yours to keep</div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="auth-form-panel">
+      <div class="auth-card">
+        <h2>Create your account</h2>
+        <p class="sub">Takes less than a minute.</p>
+
+        <div id="form-error" class="form-error hidden"></div>
+
+        <form id="register-form" novalidate>
+          <div class="field">
+            <label for="name">Full name</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="At least 6 characters" required />
+          </div>
+          <div class="field">
+            <label for="college">College</label>
+            <input type="text" id="college" name="college" placeholder="Your college or university" />
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="branch">Branch</label>
+              <input type="text" id="branch" name="branch" placeholder="Your branch" />
+            </div>
+            <div class="field">
+              <label for="graduation_year">Graduation year</label>
+              <input type="number" id="graduation_year" name="graduation_year" placeholder="Year" min="2000" max="2100" />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Create account</button>
+        </form>
+
+        <p class="auth-alt">Already have an account? <a href="login.html">Sign in</a></p>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

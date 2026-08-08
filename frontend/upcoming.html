@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Upcoming · PlacementTrack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <script>if(!localStorage.getItem('pt_token'))location.replace('login.html');</script>
+</head>
+<body>
+  <div class="backdrop" id="backdrop"></div>
+  <div class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="mark">PT</span> PlacementTrack</div>
+      <nav class="nav">
+        <a href="dashboard.html" data-page="dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+        <a href="applications.html" data-page="applications"><i class="fa-solid fa-briefcase"></i> Applications</a>
+        <a href="upcoming.html" data-page="upcoming"><i class="fa-solid fa-calendar-day"></i> Upcoming</a>
+        <a href="profile.html" data-page="profile"><i class="fa-solid fa-user"></i> Profile</a>
+        <span class="spacer"></span>
+        <a href="#" class="nav-logout" data-logout><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+          <div class="greet">
+            <h1>Upcoming</h1>
+            <p>Assessments, interviews and deadlines — sorted by what's next.</p>
+          </div>
+        </div>
+        <div class="topbar-right"><div class="avatar">?</div></div>
+      </header>
+
+      <main class="content">
+        <div class="state row-loading" id="loading"><div class="spinner"></div> Loading your schedule…</div>
+
+        <div class="state hidden" id="empty">
+          <div class="ico"><i class="fa-solid fa-calendar-check"></i></div>
+          <h3>Nothing on the horizon.</h3>
+          <p>Add assessment or interview dates to your applications and they'll appear here.</p>
+          <a href="applications.html" class="btn btn-primary">Go to applications</a>
+        </div>
+
+        <div id="up-body" class="hidden">
+          <div id="sec-assessments"></div>
+          <div id="sec-interviews"></div>
+          <div id="sec-deadlines"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/applications.js"></script>
+  <script src="js/upcoming.js"></script>
+</body>
+</html>

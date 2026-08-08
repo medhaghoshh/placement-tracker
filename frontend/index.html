@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PlacementTrack</title>
+  <script>
+    // Send users to the dashboard if logged in, otherwise to login.
+    const token = localStorage.getItem('pt_token');
+    window.location.replace(token ? 'dashboard.html' : 'login.html');
+  </script>
+</head>
+<body></body>
+</html>

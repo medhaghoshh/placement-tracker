@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in · PlacementTrack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/auth.css" />
+</head>
+<body>
+  <div class="auth-wrap">
+    <!-- Left brand panel -->
+    <aside class="auth-brand">
+      <div class="brand-logo">
+        <span class="mark">PT</span>
+        <span>PlacementTrack</span>
+      </div>
+      <div class="auth-brand-body">
+        <h1>Take control of your placement journey.</h1>
+        <p>Every company, every round, every deadline — organised in one calm dashboard so nothing slips while you focus on cracking the interview.</p>
+      </div>
+      <div class="brand-stats">
+        <div>
+          <div class="s-num">1</div>
+          <div class="s-lab">place for every application</div>
+        </div>
+        <div>
+          <div class="s-num">0</div>
+          <div class="s-lab">missed deadlines</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Right form panel -->
+    <main class="auth-form-panel">
+      <div class="auth-card">
+        <h2>Welcome back</h2>
+        <p class="sub">Sign in to continue tracking your applications.</p>
+
+        <div id="form-error" class="form-error hidden"></div>
+
+        <form id="login-form" novalidate>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required />
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+        </form>
+
+        <p class="auth-alt">Don't have an account? <a href="register.html">Create one</a></p>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

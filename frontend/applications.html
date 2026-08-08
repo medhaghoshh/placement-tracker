@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Applications · PlacementTrack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <script>if(!localStorage.getItem('pt_token'))location.replace('login.html');</script>
+</head>
+<body>
+  <div class="backdrop" id="backdrop"></div>
+  <div class="app" id="applications-page">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="mark">PT</span> PlacementTrack</div>
+      <nav class="nav">
+        <a href="dashboard.html" data-page="dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+        <a href="applications.html" data-page="applications"><i class="fa-solid fa-briefcase"></i> Applications</a>
+        <a href="upcoming.html" data-page="upcoming"><i class="fa-solid fa-calendar-day"></i> Upcoming</a>
+        <a href="profile.html" data-page="profile"><i class="fa-solid fa-user"></i> Profile</a>
+        <span class="spacer"></span>
+        <a href="#" class="nav-logout" data-logout><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+      </nav>
+    </aside>
+
+    <div class="main">
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+          <div class="greet">
+            <h1>Placement applications</h1>
+            <p>Manage and track all your applications.</p>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-primary btn-sm" id="add-btn"><i class="fa-solid fa-plus"></i> Add application</button>
+          <div class="avatar">?</div>
+        </div>
+      </header>
+
+      <main class="content">
+        <!-- Toolbar -->
+        <div class="toolbar">
+          <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input id="search" type="text" placeholder="Search company or role…" />
+          </div>
+          <select id="filter-status">
+            <option value="All">All statuses</option>
+            <option>Applied</option><option>Assessment</option><option>Interview</option>
+            <option>Selected</option><option>Rejected</option><option>On Hold</option>
+          </select>
+          <select id="filter-type">
+            <option value="All">All types</option>
+            <option>Full Time</option><option>Internship</option><option>Internship + Full Time</option>
+          </select>
+          <select id="sort">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="upcoming">Upcoming date</option>
+          </select>
+        </div>
+
+        <!-- Loading -->
+        <div class="state row-loading" id="loading"><div class="spinner"></div> Loading applications…</div>
+
+        <!-- Empty -->
+        <div class="state hidden" id="empty">
+          <div class="ico"><i class="fa-solid fa-folder-open"></i></div>
+          <h3>No applications yet.</h3>
+          <p>Start by adding the first company you've applied to.</p>
+          <button class="btn btn-primary" onclick="openModal(null, loadApps)"><i class="fa-solid fa-plus"></i> Add your first application</button>
+        </div>
+
+        <!-- List -->
+        <div id="list-wrap" class="hidden">
+          <div class="panel" style="padding:0">
+            <div class="table-wrap responsive">
+              <table class="data">
+                <thead>
+                  <tr><th>Company</th><th>Role</th><th>Applied on</th><th>Status</th><th>Package</th><th></th></tr>
+                </thead>
+                <tbody id="table-body"></tbody>
+              </table>
+              <div class="app-cards" id="cards" style="padding:12px"></div>
+            </div>
+          </div>
+          <div class="state hidden" id="no-results">
+            <div class="ico"><i class="fa-solid fa-magnifying-glass"></i></div>
+            <h3>No matches found.</h3>
+            <p>Try a different search term or clear your filters.</p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <div id="modal-root"></div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/applications.js"></script>
+</body>
+</html>

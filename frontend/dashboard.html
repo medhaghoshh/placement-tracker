@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard · PlacementTrack</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/dashboard.css" />
+  <script>if(!localStorage.getItem('pt_token'))location.replace('login.html');</script>
+</head>
+<body>
+  <div class="backdrop" id="backdrop"></div>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand"><span class="mark">PT</span> PlacementTrack</div>
+      <nav class="nav">
+        <a href="dashboard.html" data-page="dashboard"><i class="fa-solid fa-gauge-high"></i> Dashboard</a>
+        <a href="applications.html" data-page="applications"><i class="fa-solid fa-briefcase"></i> Applications</a>
+        <a href="upcoming.html" data-page="upcoming"><i class="fa-solid fa-calendar-day"></i> Upcoming</a>
+        <a href="profile.html" data-page="profile"><i class="fa-solid fa-user"></i> Profile</a>
+        <span class="spacer"></span>
+        <a href="#" class="nav-logout" data-logout><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+      </nav>
+    </aside>
+
+    <!-- Main -->
+    <div class="main">
+      <header class="topbar">
+        <div style="display:flex;align-items:center;gap:12px">
+          <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+          <div class="greet">
+            <h1 id="greet-name">Welcome</h1>
+            <p>Track your placement journey in one place.</p>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <button class="btn btn-primary btn-sm" id="quick-add"><i class="fa-solid fa-plus"></i> Add application</button>
+          <div class="avatar">?</div>
+        </div>
+      </header>
+
+      <main class="content" id="content">
+        <!-- Loading -->
+        <div class="state row-loading" id="loading"><div class="spinner"></div> Loading your dashboard…</div>
+
+        <!-- Empty state -->
+        <div class="state hidden" id="empty">
+          <div class="ico"><i class="fa-solid fa-rocket"></i></div>
+          <h3>Your placement journey starts here.</h3>
+          <p>Add your first company application to start tracking rounds, deadlines and offers.</p>
+          <button class="btn btn-primary" id="empty-add"><i class="fa-solid fa-plus"></i> Add application</button>
+        </div>
+
+        <!-- Dashboard body -->
+        <div id="dash-body" class="hidden">
+          <!-- KPIs -->
+          <section class="kpi-grid">
+            <div class="kpi">
+              <div class="ico i-total"><i class="fa-solid fa-layer-group"></i></div>
+              <div class="num" id="kpi-total">0</div>
+              <div class="lab">Total applications</div>
+            </div>
+            <div class="kpi">
+              <div class="ico i-active"><i class="fa-solid fa-bolt"></i></div>
+              <div class="num" id="kpi-active">0</div>
+              <div class="lab">Active applications</div>
+            </div>
+            <div class="kpi">
+              <div class="ico i-intv"><i class="fa-solid fa-comments"></i></div>
+              <div class="num" id="kpi-interviews">0</div>
+              <div class="lab">In interviews</div>
+            </div>
+            <div class="kpi">
+              <div class="ico i-offer"><i class="fa-solid fa-trophy"></i></div>
+              <div class="num" id="kpi-offers">0</div>
+              <div class="lab">Offers</div>
+            </div>
+          </section>
+
+          <!-- Charts row -->
+          <section class="grid-2">
+            <div class="panel">
+              <div class="panel-head">
+                <div><h3>Status distribution</h3><div class="sub">Where your applications stand</div></div>
+              </div>
+              <div style="position:relative;height:260px"><canvas id="statusChart"></canvas></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><h3>Application funnel</h3><div class="sub">From applied to offer</div></div></div>
+              <div class="funnel" id="funnel"></div>
+            </div>
+          </section>
+
+          <!-- Monthly + upcoming -->
+          <section class="grid-2">
+            <div class="panel">
+              <div class="panel-head"><div><h3>Applications per month</h3><div class="sub">Your activity over the year</div></div></div>
+              <div style="position:relative;height:240px"><canvas id="monthlyChart"></canvas></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head">
+                <div><h3>Upcoming</h3><div class="sub">Next 5 deadlines & rounds</div></div>
+                <a href="upcoming.html" class="link-btn">View all</a>
+              </div>
+              <div class="up-list" id="dash-upcoming"></div>
+            </div>
+          </section>
+
+          <!-- Recent applications -->
+          <section class="panel">
+            <div class="panel-head">
+              <div><h3>Recent applications</h3><div class="sub">Your latest 5</div></div>
+              <a href="applications.html" class="link-btn">See all</a>
+            </div>
+            <div class="table-wrap">
+              <table class="data">
+                <thead>
+                  <tr><th>Company</th><th>Role</th><th>Applied on</th><th>Status</th><th>Package</th><th></th></tr>
+                </thead>
+                <tbody id="recent-body"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Add/Edit modal is injected by applications.js helper on this page too -->
+  <div id="modal-root"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/applications.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
